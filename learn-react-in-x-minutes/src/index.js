@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+/* This is saying:
+      'Render the cotent we pass in the App, at this root element'
+*/
 ReactDOM.render(
   <React.StrictMode>
     <App />
