@@ -1,6 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import TodoList from "./TodoList";
 import {v4 as uuidv4} from 'uuid';
+
+const LOCAL_STORAGE_KEY = 'todoApp.todoArray'
 
 function App() {
   // 
@@ -13,6 +15,17 @@ function App() {
   */
   const [ todoArray, setTodos ] = useState([])
   const todoNameRef = useRef() // Lets you reference value of input
+
+  // call to load todos
+  useEffect( () => {
+    const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    if (storedTodos) setTodos(storedTodos)
+  }, [])
+
+  // whenever something changes, call useEffect to presist list across page reloads
+  useEffect( () => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoArray))
+  }, [todoArray] )
 
   // handle onClick event of input
   function handleAddTodo(e) {
