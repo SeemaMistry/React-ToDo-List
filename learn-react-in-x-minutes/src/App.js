@@ -10,7 +10,7 @@ function App() {
     todos -> every single todos inside out todo-state
     setTodos -> function called to update each of the todos
   */
-  const [ todoArray, setTodos ] = useState(['Todo 1', 'Todo 2'])
+  const [ todoArray, setTodos ] = useState([{ id: 1, name: 'Todo 1', complete: false}])
 
   // create some html for the todo list using JSX
 
