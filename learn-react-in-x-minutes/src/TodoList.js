@@ -1,9 +1,10 @@
 import React from 'react'
+import PrintTodo from './Todo'
 
-export default function TodoList({ todos }) {
+export default function TodoList({ alltodos }) {
     return (
-        <div>
-            { todos.length }
-        </div>
+        alltodos.map (todo => {
+            return <PrintTodo todoItem={todo} />
+        })
     )
 }
