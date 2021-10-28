@@ -27,6 +27,7 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoArray))
   }, [todoArray] )
 
+  // TodoList.js calls on this function to toggle the task box
   // apply checked or uncheck mark on box of todo of id
   function toggleTodo(id) {
     /* in react, never DIRECTLY modify a state-variable:

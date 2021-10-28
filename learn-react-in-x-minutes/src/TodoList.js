@@ -2,6 +2,7 @@ import React from 'react'
 import PrintTodo from './Todo'
 
 export default function TodoList({ alltodos, toggleTodo }) {
+    // From TodoList, toggleTodo gets passed up into our App -> App.js
     return (
         alltodos.map (todo => {
             // need a unique key associated with each todoItem
