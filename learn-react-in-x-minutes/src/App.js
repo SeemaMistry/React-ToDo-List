@@ -53,6 +53,11 @@ function App() {
     todoNameRef.current.value = null // clear input onclick
   }
 
+  function handleClearTodos() {
+    const newTodoList = todoArray.filter(todo => !todo.complete)
+    setTodos(newTodoList)
+  }
+
   // create some html for the todo list using JSX
 
   // Return can only return 1 thing, so 2 html elements cannot be returned.
@@ -63,7 +68,7 @@ function App() {
       <TodoList alltodos={todoArray} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>Add Task</button>
-      <button>Clear Completed Tasks</button>
+      <button onClick={handleClearTodos}>Clear Completed Tasks</button>
       <div> {todoArray.filter(todo => !todo.complete).length} tasks left</div>
     </>
   )
