@@ -53,6 +53,7 @@ function App() {
     todoNameRef.current.value = null // clear input onclick
   }
 
+  // remove complete:true tasks from the list
   function handleClearTodos() {
     const newTodoList = todoArray.filter(todo => !todo.complete)
     setTodos(newTodoList)
