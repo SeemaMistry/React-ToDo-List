@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import TodoList from "./TodoList";
 
 function App() {
@@ -10,7 +10,15 @@ function App() {
     todos -> every single todos inside out todo-state
     setTodos -> function called to update each of the todos
   */
-  const [ todoArray, setTodos ] = useState([{ id: 1, name: 'Todo 1', complete: false}])
+  const [ todoArray, setTodos ] = useState([])
+  const todoNameRef = useRef() // Lets you reference value of input
+
+  // handle onClick event of input
+  function handleAddTodo(e) {
+    const name = todoNameRef.current.value // using useRef to get input value
+    if (name === '') return
+    todoNameRef.current.value = null // clear input onclick
+  }
 
   // create some html for the todo list using JSX
 
@@ -20,8 +28,8 @@ function App() {
   return (
     <>
       <TodoList alltodos={todoArray} />
-      <input type="text" />
-      <button>Add Task</button>
+      <input ref={todoNameRef} type="text" />
+      <button onClick={handleAddTodo}>Add Task</button>
       <button>Clear Completed Tasks</button>
       <div>0 tasks left</div>
     </>
