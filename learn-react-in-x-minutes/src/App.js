@@ -17,6 +17,10 @@ function App() {
   function handleAddTodo(e) {
     const name = todoNameRef.current.value // using useRef to get input value
     if (name === '') return
+    setTodos(prevTodos => {
+      // create new task object, by adding it to previousTodo list
+      return [...prevTodos, {id: 1, name: name, complete: false}] 
+    })
     todoNameRef.current.value = null // clear input onclick
   }
 
