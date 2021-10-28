@@ -16,7 +16,7 @@ function App() {
   const [ todoArray, setTodos ] = useState([])
   const todoNameRef = useRef() // Lets you reference value of input
 
-  // call to load todos
+  // First time loading, check if local storage has existing tasks-todos. If yes, load previous session
   useEffect( () => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
     if (storedTodos) setTodos(storedTodos)
@@ -26,6 +26,20 @@ function App() {
   useEffect( () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todoArray))
   }, [todoArray] )
+
+  // apply checked or uncheck mark on box of todo of id
+  function toggleTodo(id) {
+    /* in react, never DIRECTLY modify a state-variable:
+        - make a copy
+        - modify the copy
+        - use that copy to set the new state variable
+    */
+    const newTodoList = [...todoArray] // get a copy of state-variable
+    const selectTask = newTodoList.find(todo => todo.id === id)
+    selectTask.complete = !selectTask.complete
+    setTodos(newTodoList)
+  }
+
 
   // handle onClick event of input
   function handleAddTodo(e) {
@@ -45,7 +59,7 @@ function App() {
   // <> [html code] </>
   return (
     <>
-      <TodoList alltodos={todoArray} />
+      <TodoList alltodos={todoArray} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>Add Task</button>
       <button>Clear Completed Tasks</button>
